@@ -1,6 +1,6 @@
 /** L05: Parity
-FIXME: Add names here // CHANGE THIS
-FIXME: username(s):  // CHANGE THIS
+FIXME: Liberty Mupotsa 
+FIXME: username(s): mupotsal
 Purpose: To use arrays, classes, and to learn some things about binary.
 
 Acknowledgements:
