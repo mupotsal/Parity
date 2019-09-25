@@ -42,11 +42,30 @@ public:
 		}
 		return;
 	}
+	int is_odd() {
+		sum_byte = 0;
+		for (int i = 0; i < bytelen; i++) {
+			if (byte[i] == 0) {				
+				sum_byte += 1;
+
+				if ((sum_byte % 2) == 0) {
+					return sum_byte;
+				}
+				else if (sum_byte % 2 != 0){
+					return 0;
+				}
+			}
+			
 
 
+
+		}
+	}
+	
 private:
 	bool byte[8] = { false }; //This initializes all of the bits
 	const int bytelen = 8;
+	int sum_byte = 0;
 };
 
 
@@ -68,10 +87,12 @@ int main() {
 	testbyte.set_byte();
 	cout << "Here is the byte you entered: ";
 	testbyte.show_byte();
+
 	cout << endl;
 
-	cout << "Here is anthor byte: ";
+	cout << "Here is anthor byte: " << endl;
 	mybyte.show_byte();
+	cout << "Is the byte odd? "<<mybyte.is_odd()<< endl;
 	cout << endl;
 	//FIXME: place code to fully test your Parity class
 
