@@ -42,32 +42,106 @@ public:
 		}
 		return;
 	}
-	int is_odd() {
+	
+	bool is_odd() {
 		sum_byte = 0;
 		for (int i = 0; i < bytelen; i++) {
-			if (byte[i] == 0) {				
+			if (byte[i] == 1) {
 				sum_byte += 1;
+		     }
+			else  {
+				sum_byte += 0;
+			}						
+		}
+		if (sum_byte % 2 == 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 
-				if ((sum_byte % 2) == 0) {
-					return sum_byte;
-				}
-				else if (sum_byte % 2 != 0){
-					return 0;
-				}
+	}
+
+	void set_even() {
+		sum_svbyte = 0;
+		for (int i = 0; i < bytelen-1; i++) {
+			if (byte[i] == 1) {
+				sum_svbyte += 1;
 			}
-			
+			else {
+				sum_byte += 0;
+			}
+		}
+		if (sum_svbyte % 2 == 0) {
+			byte[7] = 0;
+		}
+		else {
+			byte[7] = 1;
+		}
+		for (int i = 0; i < bytelen; i++) {
+			cout << byte[i];
+		}
+		return;
+	}
 
-
-
+void set_odd() {
+	sum_svbyte = 0;
+	for (int i = 0; i < bytelen - 1; i++) {
+		if (byte[i] == 1) {
+			sum_svbyte += 1;
+		}
+		else {
+			sum_byte += 0;
 		}
 	}
+	if (sum_svbyte % 2 == 0) {
+		byte[7] = 1;
+	}
+	else {
+		byte[7] = 0;
+	}
+	for (int i = 0; i < bytelen; i++) {
+		cout << byte[i];
+	}
+	return;
+}
 	
+void flip() {
+	for (int i = 0; i < bytelen; i++) {
+		if (byte[i] == 1) {
+			byte[i] = 0;
+		}
+		else {
+			byte[i] = 1;
+		}
+		
+	}
+	for (int i = 0; i < bytelen; i++) {
+		cout << byte[i];
+	}
+}
+	
+	
+	
+		
+ 
+friend ostream& operator <<(ostream& stream, const Parity& par);
+
+
+
+
+
 private:
 	bool byte[8] = { false }; //This initializes all of the bits
 	const int bytelen = 8;
 	int sum_byte = 0;
-};
+	int sum_svbyte = 0;
+}; 
 
+ostream& operator <<(ostream& stream, const Parity& par) {
+	stream << *par.byte << endl;
+	return stream;
+}
 
 
 
@@ -76,7 +150,7 @@ private:
 
 int main() {
 
-	bool truebyte[8] = { true, true, true, true, true, true, true, true }; // this style of initalization only works at compile time
+	bool truebyte[8] = { true, true, true, true, false, true, true, true}; // this style of initalization only works at compile time
 	int readchar = 'Y';
 
 	cout << "Welcome to the parity class!\n" << endl; //FIXME: Feel free to change this!
@@ -84,15 +158,37 @@ int main() {
 	Parity testbyte;
 	Parity mybyte(truebyte);  // uses contructor that sets byte using parameter
 
-	testbyte.set_byte();
+
+
+	cout << "Flip the array" << endl;
+	//testbyte.flip();
+	mybyte.flip();
+
+	//testbyte.set_byte();
 	cout << "Here is the byte you entered: ";
 	testbyte.show_byte();
 
 	cout << endl;
 
-	cout << "Here is anthor byte: " << endl;
+	cout << "Here is anthor byte: " << endl;	
 	mybyte.show_byte();
-	cout << "Is the byte odd? "<<mybyte.is_odd()<< endl;
+
+	cout << "Is it odd__ " << mybyte.is_odd() << endl;
+	cout << "Is testbyte odd__" << testbyte.is_odd() << endl;
+	
+	// Testing set even and is working
+	testbyte.set_even();
+	mybyte.set_even();
+
+
+
+	testbyte.set_odd();
+	mybyte.set_odd();
+
+
+	cout << "Flip the array" << endl;
+	//testbyte.flip();
+	mybyte.flip();
 	cout << endl;
 	//FIXME: place code to fully test your Parity class
 
