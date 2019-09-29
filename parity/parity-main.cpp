@@ -43,7 +43,7 @@ public:
 		return;
 	}
 	
-	bool is_odd() {
+	bool is_odd() { // This is used to check if the array is odd, returns true if the array is odd and false if the array is odd
 		sum_byte = 0;
 		for (int i = 0; i < bytelen; i++) {
 			if (byte[i] == 1) {
@@ -62,7 +62,7 @@ public:
 
 	}
 
-	void set_even() {
+	void set_even() { // This method sets the given array to even parity
 		sum_svbyte = 0;
 		for (int i = 0; i < bytelen-1; i++) {
 			if (byte[i] == 1) {
@@ -84,7 +84,7 @@ public:
 		return;
 	}
 
-void set_odd() {
+void set_odd() {  // This is used to set the array to odd parity
 	sum_svbyte = 0;
 	for (int i = 0; i < bytelen - 1; i++) {
 		if (byte[i] == 1) {
@@ -114,21 +114,24 @@ void flip() {
 		else {
 			byte[i] = 1;
 		}
-		
+
 	}
-	for (int i = 0; i < bytelen; i++) {
+	/*for (int i = 0; i < bytelen; i++) { //  put this to test if my method is working
 		cout << byte[i];
+	}*/
+}		
+
+bool* byte_array() {
+
+	bool static bit_array[8];
+	for (int i = 0; i < bytelen; i++) {	 
+		byte[i] = bit_array[i];	
 	}
+	return bit_array;
 }
-	
-	
-	
-		
  
 friend ostream& operator <<(ostream& stream, const Parity& par);
-
-
-
+friend int main();
 
 
 private:
@@ -136,10 +139,12 @@ private:
 	const int bytelen = 8;
 	int sum_byte = 0;
 	int sum_svbyte = 0;
+	
+
 }; 
 
-ostream& operator <<(ostream& stream, const Parity& par) {
-	stream << *par.byte << endl;
+ostream& operator <<(ostream& stream, const Parity& bit) {
+	stream <<bit.byte << endl;
 	return stream;
 }
 
@@ -162,9 +167,9 @@ int main() {
 
 	cout << "Flip the array" << endl;
 	//testbyte.flip();
-	mybyte.flip();
+	//testbyte.flip() ;
 
-	//testbyte.set_byte();
+	testbyte.set_byte();
 	cout << "Here is the byte you entered: ";
 	testbyte.show_byte();
 
@@ -188,9 +193,24 @@ int main() {
 
 	cout << "Flip the array" << endl;
 	//testbyte.flip();
-	mybyte.flip();
+	//mybyte.flip();
+
+	bool *get_array; // using pointers to  get the array values stored
+	cout << "The following is the byte returned " << endl;
+	get_array = mybyte.byte_array();
+
+	/*for (int i = 0; i < 8; i++) {
+		cout << "*(get_array + " << i << ") : ";
+		cout << *(get_array + i) << endl;
+	}*/
+	cout << get_array << endl;
+	
 	cout << endl;
 	//FIXME: place code to fully test your Parity class
+
+	//cout  << mybyte.byte << endl;
+
+
 
 	cin >> readchar; //This is to keep screen open in some situations.
 
