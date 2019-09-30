@@ -5,7 +5,6 @@ Purpose: To use arrays, classes, and to learn some things about binary.
 
 Acknowledgements:
 Modified from original code written by Dr. Jan Pearce
-FIXME: Add all other resources used // CHANGE THIS!!
 */
 
 #include <iostream>
