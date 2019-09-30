@@ -129,9 +129,21 @@ bool* byte_array() {
 	}
 	return bit_array;
 }
+
+bool masking(bool maskbyte[]) {
+	for (int i=0;i < bytelen; i++)
+		if (byte[i] && maskbyte[i] == 1) {
+			byte[i] = true;
+		}
+		else {
+			byte[i] = 0;
+		}
+
+	return byte;
+}
  
-friend ostream& operator <<(ostream& stream, const Parity& par);
-friend int main();
+friend ostream& operator <<(ostream& stream,  Parity& par);
+
 
 
 private:
@@ -143,8 +155,9 @@ private:
 
 }; 
 
-ostream& operator <<(ostream& stream, const Parity& bit) {
-	stream <<bit.byte << endl;
+ostream& operator <<(ostream& stream, Parity& parval) {
+	parval.show_byte(); 
+	
 	return stream;
 }
 
@@ -152,16 +165,16 @@ ostream& operator <<(ostream& stream, const Parity& bit) {
 
 
 
-
 int main() {
 
-	bool truebyte[8] = { true, true, true, true, false, true, true, true}; // this style of initalization only works at compile time
+	bool truebyte[8] = { true, true, true, true, true, true, true, true}; // this style of initalization only works at compile time
 	int readchar = 'Y';
 
 	cout << "Welcome to the parity class!\n" << endl; //FIXME: Feel free to change this!
 
 	Parity testbyte;
 	Parity mybyte(truebyte);  // uses contructor that sets byte using parameter
+
 
 
 
@@ -172,9 +185,14 @@ int main() {
 	testbyte.set_byte();
 	cout << "Here is the byte you entered: ";
 	testbyte.show_byte();
+	bool maskbyte[8] = { true, true, false, true, true, true, true, true };
+	testbyte.masking(maskbyte);
 
+
+	
 	cout << endl;
 
+	cout << testbyte << endl;
 	cout << "Here is anthor byte: " << endl;	
 	mybyte.show_byte();
 
@@ -183,13 +201,19 @@ int main() {
 	
 	// Testing set even and is working
 	testbyte.set_even();
+	cout << "The mybyte is set to even below " << endl;
 	mybyte.set_even();
 
+	
 
-
+	cout << "The mybyte is set to odd below " << endl;
 	testbyte.set_odd();
+	cout << "This is the printed one" << endl;
+	cout  << testbyte<< endl;
+
 	mybyte.set_odd();
 
+	
 
 	cout << "Flip the array" << endl;
 	//testbyte.flip();
@@ -205,11 +229,11 @@ int main() {
 	}*/
 	cout << get_array << endl;
 	
+	//cout << tbyte << endl;
 	cout << endl;
 	//FIXME: place code to fully test your Parity class
 
-	//cout  << mybyte.byte << endl;
-
+	
 
 
 	cin >> readchar; //This is to keep screen open in some situations.
