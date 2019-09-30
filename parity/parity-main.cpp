@@ -185,7 +185,7 @@ int main() {
 	cout << "Here is the byte you entered: ";
 	testbyte.show_byte();
 
-
+	cout << "   " << endl;
 	cout << "Is mybyte_odd__ " << mybyte.is_odd() << endl;
 	cout << "Is testbyte odd__" << testbyte.is_odd() << endl;
 
